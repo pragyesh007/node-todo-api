@@ -26,7 +26,16 @@ app.post('/todos' , (req,res) =>
     //console.log(req.body);
 });
 
-
+app.get('/todos' , (req,res) =>
+  {
+    todo.find().then( (docs) =>
+     {
+       res.send(docs);
+     } , (err) =>
+       {
+         res.status(400).send(err);
+       });
+  });
 
 app.listen(3000, () =>
 {
