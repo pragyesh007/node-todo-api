@@ -9,7 +9,7 @@ var id = '5c59af8aab0d3521045a64cc';
 
 if(!ObjectID.isValid(id))
 {
-  console.log('ID not found');
+  return console.log('ID not found');
 }
 //
 // todo.find(
