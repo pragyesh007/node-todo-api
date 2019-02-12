@@ -110,7 +110,28 @@ app.get('/todos' , (req,res) =>
    }).catch((e) => res.status(400).send()) ;
    });
 
+app.post('/users', (req,res) =>
+{
+  var body = _.pick(req.body,['email','password']);
 
+  var User = new user(
+    {
+      email:body.email,
+      password:body.password
+    }
+  );
+  User.save().then(() =>
+  {
+     return User.generateAuthToken();
+  }).then((token) =>
+  {
+    res.header('x-auth',token).send(User);
+  }).catch((e) =>
+  {
+    res.status(400).send(e);
+  });
+
+});
 
 app.listen(port, () =>
 {
